@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/nikolskayaos/practicum-metrics/internal"
+	"github.com/nikolskayaos/practicum-metrics/server/storage"
 	"net/http"
 	"path"
 	"strconv"
@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	ms := internal.NewMemStorage()
+	ms := storage.NewMemStorage()
 	gh := NewGaugeHandler(ms)
 	ch := NewCounterHandler(ms)
 	uh := NewUpdateHandler(gh, ch)
@@ -50,10 +50,10 @@ func (h *UpdateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 type GaugeHandler struct {
-	MemStorage *internal.MemStorage
+	MemStorage *storage.MemStorage
 }
 
-func NewGaugeHandler(ms *internal.MemStorage) *GaugeHandler {
+func NewGaugeHandler(ms *storage.MemStorage) *GaugeHandler {
 	return &GaugeHandler{
 		MemStorage: ms,
 	}
@@ -86,10 +86,10 @@ func (g *GaugeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 type CounterHandler struct {
-	MemStorage *internal.MemStorage
+	MemStorage *storage.MemStorage
 }
 
-func NewCounterHandler(ms *internal.MemStorage) *CounterHandler {
+func NewCounterHandler(ms *storage.MemStorage) *CounterHandler {
 	return &CounterHandler{
 		MemStorage: ms,
 	}
