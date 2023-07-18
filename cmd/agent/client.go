@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const BaseURL = "http://localhost:8080/update"
+const BaseURL = "http://localhost:8080/update/"
 
 type Client struct {
 	client http.Client
@@ -23,16 +23,16 @@ func NewClient() *Client {
 }
 
 func (cl *Client) SendGaugeMetric(name string, value float64) {
-	url := path.Join(BaseURL, "gauge", name, fmt.Sprintf("%f", value))
-	request, err := http.NewRequest(http.MethodPost, url, nil)
+	urlPath := path.Join("gauge", name, fmt.Sprintf("%f", value))
+	request, err := http.NewRequest(http.MethodPost, BaseURL+urlPath, nil)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	request.Header.Set("Content-Type", "text/plain ")
+	request.Header.Set("Content-Type", "text/plain")
 	response, err := cl.client.Do(request)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err, "ddd")
 		return
 	}
 	defer response.Body.Close()
@@ -45,8 +45,8 @@ func (cl *Client) SendGaugeMetric(name string, value float64) {
 }
 
 func (cl *Client) SendCounterMetric(name string, value int64) {
-	url := path.Join(BaseURL, "counter", name, fmt.Sprintf("%d", value))
-	request, err := http.NewRequest(http.MethodPost, url, nil)
+	urlPath := path.Join(BaseURL, "counter", name, fmt.Sprintf("%d", value))
+	request, err := http.NewRequest(http.MethodPost, BaseURL+urlPath, nil)
 	if err != nil {
 		fmt.Println(err)
 		return
