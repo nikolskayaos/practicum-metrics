@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	client2 "github.com/nikolskayaos/practicum-metrics/cmd/agent/client"
 	"math/rand"
 	"runtime"
 	"time"
 )
+
+const BaseURL = "http://localhost:8080/update"
 
 func main() {
 	var m runtime.MemStats
@@ -15,7 +18,7 @@ func main() {
 	reportInterval := 10 * time.Second
 	pollInterval := 2 * time.Second
 
-	client := NewClient()
+	client := client2.NewClient(BaseURL)
 
 	go func() {
 		for {
