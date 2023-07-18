@@ -45,7 +45,7 @@ func (cl *Client) SendGaugeMetric(name string, value float64) {
 }
 
 func (cl *Client) SendCounterMetric(name string, value int64) {
-	urlPath := path.Join(BaseURL, "counter", name, fmt.Sprintf("%d", value))
+	urlPath := path.Join("counter", name, fmt.Sprintf("%d", value))
 	request, err := http.NewRequest(http.MethodPost, BaseURL+urlPath, nil)
 	if err != nil {
 		fmt.Println(err)
