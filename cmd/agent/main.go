@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	client2 "github.com/nikolskayaos/practicum-metrics/cmd/agent/client"
+	"github.com/nikolskayaos/practicum-metrics/agent/client"
 	"math/rand"
 	"runtime"
 	"time"
@@ -18,7 +18,7 @@ func main() {
 	reportInterval := 10 * time.Second
 	pollInterval := 2 * time.Second
 
-	client := client2.NewClient(BaseURL)
+	cl := client.NewClient(BaseURL)
 
 	go func() {
 		for {
@@ -34,36 +34,36 @@ func main() {
 		alloc := m.Alloc
 		buckHashSys := m.BuckHashSys
 
-		client.SendGaugeMetric("Alloc", float64(m.Alloc))
-		client.SendGaugeMetric("BuckHashSys", float64(m.BuckHashSys))
-		client.SendGaugeMetric("GCCPUFraction", m.GCCPUFraction)
-		client.SendGaugeMetric("GCSys", float64(m.GCSys))
-		client.SendGaugeMetric("HeapAlloc", float64(m.HeapAlloc))
-		client.SendGaugeMetric("HeapIdle", float64(m.HeapIdle))
-		client.SendGaugeMetric("HeapInuse", float64(m.HeapInuse))
-		client.SendGaugeMetric("HeapObjects", float64(m.HeapObjects))
-		client.SendGaugeMetric("HeapReleased", float64(m.HeapReleased))
-		client.SendGaugeMetric("HeapSys", float64(m.HeapSys))
-		client.SendGaugeMetric("LastGC", float64(m.LastGC))
-		client.SendGaugeMetric("Lookups", float64(m.Lookups))
-		client.SendGaugeMetric("MCacheInuse", float64(m.MCacheInuse))
-		client.SendGaugeMetric("MCacheSys", float64(m.MCacheSys))
-		client.SendGaugeMetric("MSpanInuse", float64(m.MSpanInuse))
-		client.SendGaugeMetric("MSpanSys", float64(m.MSpanSys))
-		client.SendGaugeMetric("Mallocs", float64(m.Mallocs))
-		client.SendGaugeMetric("NextGC", float64(m.NextGC))
-		client.SendGaugeMetric("NumForcedGC", float64(m.NumForcedGC))
-		client.SendGaugeMetric("NumGC", float64(m.NumGC))
-		client.SendGaugeMetric("OtherSys", float64(m.OtherSys))
-		client.SendGaugeMetric("PauseTotalNs", float64(m.PauseTotalNs))
-		client.SendGaugeMetric("StackInuse", float64(m.StackInuse))
-		client.SendGaugeMetric("StackSys", float64(m.StackSys))
-		client.SendGaugeMetric("Sys", float64(m.Sys))
-		client.SendGaugeMetric("TotalAlloc", float64(m.TotalAlloc))
-		client.SendGaugeMetric("TotalAlloc", float64(m.TotalAlloc))
-		client.SendGaugeMetric("RandomValue", randomValue)
+		cl.SendGaugeMetric("Alloc", float64(m.Alloc))
+		cl.SendGaugeMetric("BuckHashSys", float64(m.BuckHashSys))
+		cl.SendGaugeMetric("GCCPUFraction", m.GCCPUFraction)
+		cl.SendGaugeMetric("GCSys", float64(m.GCSys))
+		cl.SendGaugeMetric("HeapAlloc", float64(m.HeapAlloc))
+		cl.SendGaugeMetric("HeapIdle", float64(m.HeapIdle))
+		cl.SendGaugeMetric("HeapInuse", float64(m.HeapInuse))
+		cl.SendGaugeMetric("HeapObjects", float64(m.HeapObjects))
+		cl.SendGaugeMetric("HeapReleased", float64(m.HeapReleased))
+		cl.SendGaugeMetric("HeapSys", float64(m.HeapSys))
+		cl.SendGaugeMetric("LastGC", float64(m.LastGC))
+		cl.SendGaugeMetric("Lookups", float64(m.Lookups))
+		cl.SendGaugeMetric("MCacheInuse", float64(m.MCacheInuse))
+		cl.SendGaugeMetric("MCacheSys", float64(m.MCacheSys))
+		cl.SendGaugeMetric("MSpanInuse", float64(m.MSpanInuse))
+		cl.SendGaugeMetric("MSpanSys", float64(m.MSpanSys))
+		cl.SendGaugeMetric("Mallocs", float64(m.Mallocs))
+		cl.SendGaugeMetric("NextGC", float64(m.NextGC))
+		cl.SendGaugeMetric("NumForcedGC", float64(m.NumForcedGC))
+		cl.SendGaugeMetric("NumGC", float64(m.NumGC))
+		cl.SendGaugeMetric("OtherSys", float64(m.OtherSys))
+		cl.SendGaugeMetric("PauseTotalNs", float64(m.PauseTotalNs))
+		cl.SendGaugeMetric("StackInuse", float64(m.StackInuse))
+		cl.SendGaugeMetric("StackSys", float64(m.StackSys))
+		cl.SendGaugeMetric("Sys", float64(m.Sys))
+		cl.SendGaugeMetric("TotalAlloc", float64(m.TotalAlloc))
+		cl.SendGaugeMetric("TotalAlloc", float64(m.TotalAlloc))
+		cl.SendGaugeMetric("RandomValue", randomValue)
 
-		client.SendCounterMetric("PollCount", pollCount)
+		cl.SendCounterMetric("PollCount", pollCount)
 		fmt.Println("alloc", alloc)
 		fmt.Println("buckHashSys", buckHashSys)
 		time.Sleep(reportInterval)
