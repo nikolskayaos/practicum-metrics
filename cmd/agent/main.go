@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/nikolskayaos/practicum-metrics/agent/client"
+	"github.com/nikolskayaos/practicum-metrics/cmd/agent/client"
 	"math/rand"
 	"runtime"
 	"time"

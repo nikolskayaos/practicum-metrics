@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/nikolskayaos/practicum-metrics/server/handlers"
-	"github.com/nikolskayaos/practicum-metrics/server/storage"
+	"github.com/nikolskayaos/practicum-metrics/cmd/server/handlers"
+	"github.com/nikolskayaos/practicum-metrics/cmd/server/storage"
 	"net/http"
 )
 

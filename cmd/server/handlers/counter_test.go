@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/nikolskayaos/practicum-metrics/server/storage"
+	"github.com/nikolskayaos/practicum-metrics/cmd/server/storage"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
@@ -47,6 +47,7 @@ func TestStoreCounterMetrics(t *testing.T) {
 			ms := &storage.MemStorage{
 				Counters: test.counters,
 			}
+
 			ch := NewCounterHandler(ms)
 			ch.ServeHTTP(w, request)
 			res, ok := ms.Counters[test.expectCounters.key]

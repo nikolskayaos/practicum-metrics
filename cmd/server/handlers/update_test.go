@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/nikolskayaos/practicum-metrics/server/storage"
+	"github.com/nikolskayaos/practicum-metrics/cmd/server/storage"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
